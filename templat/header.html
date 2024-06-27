@@ -60,11 +60,18 @@
 								<button class="header__search-btn" type="button">
 									<i class="icon ion-ios-search"></i>
 								</button>
-
-								<a href="{% url 'signin' %}" class="header__sign-in">
+                               
+								{% if  user.is_authenticated %}
+								<a href="" class="header__sign-in two">
+									<i class="icon ion-ios-log-in"></i>
+									<span>sign out</span>
+								</a>
+								{% else %}
+								<a href="{% url 'signin' %}" class="header__sign-in one">
 									<i class="icon ion-ios-log-in"></i>
 									<span>sign in</span>
 								</a>
+								{% endif %}
 							</div>
 							<!-- end header auth -->
 

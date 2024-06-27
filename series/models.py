@@ -36,7 +36,7 @@ class Trailer(models.Model):
     
     
 class SeriesComments(models.Model):
-    owner=models.ForeignKey(Series,related_name='series_name1',on_delete=models.CASCADE)
+    owner=models.ForeignKey(Series,related_name='series_name1',on_delete=models.SET_NULL,null=True)
     user=models.ForeignKey(Customer,related_name='person',on_delete=models.CASCADE)
     comment=models.TextField(null=False)
     created_at=models.DateTimeField(timezone.now)
@@ -47,7 +47,7 @@ class SeriesComments(models.Model):
     
     
 class SeriesReview(models.Model):
-    owner=models.ForeignKey(Series,related_name='series_name2',on_delete=models.CASCADE)
+    owner=models.ForeignKey(Series,related_name='series_name2',on_delete=models.SET_NULL,null=True)
     user=models.ForeignKey(Customer,related_name='asscociated_person',on_delete=models.CASCADE)
     review=models.TextField(null=False)
     description=models.TextField()
