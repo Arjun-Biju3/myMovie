@@ -16,15 +16,20 @@
 							<ul class="header__nav">
 								<!-- dropdown -->
 								<li class="header__nav-item">
-									<a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuHome" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Home</a>
-
-									
-								</li>
+									<a href="{% url 'home' %}" class="header__nav-link">Home</a>
+                                </li>
+								<li class="header__nav-item">
+									<a href="{% url 'movies' %}" class="header__nav-link">Movies</a>
+                                </li>
+								<li class="header__nav-item">
+									<a href="{% url 'series' %}" class="header__nav-link">Series</a>
+                                </li>
+								
 								<!-- end dropdown -->
 
 								<!-- dropdown -->
 								<li class="header__nav-item">
-									<a class="dropdown-toggle header__nav-link" href="#" role="button" id="dropdownMenuCatalog" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Catalog</a>
+									<a href="{% url 'home' %}" class="header__nav-link">Catalog</a>
 
 	
 								</li>
@@ -32,7 +37,7 @@
 
 
 								<li class="header__nav-item">
-									<a href="faq.html" class="header__nav-link">Help</a>
+									<a href="{% url 'help' %}" class="header__nav-link">Help</a>
 								</li>
 
 								<!-- dropdown -->
@@ -40,9 +45,9 @@
 									<a class="dropdown-toggle header__nav-link header__nav-link--more" href="#" role="button" id="dropdownMenuMore" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="icon ion-ios-more"></i></a>
 
 									<ul class="dropdown-menu header__dropdown-menu" aria-labelledby="dropdownMenuMore">
-										<li><a href="about.html">About</a></li>
+										<li><a href="{% url 'about' %}">About</a></li>
 										
-										<li><a href="signup.html">Sign Up</a></li>
+										<li><a href="{% url 'signup' %}">Sign Up</a></li>
 										
 									</ul>
 								</li>
@@ -56,7 +61,7 @@
 									<i class="icon ion-ios-search"></i>
 								</button>
 
-								<a href="signin.html" class="header__sign-in">
+								<a href="{% url 'signin' %}" class="header__sign-in">
 									<i class="icon ion-ios-log-in"></i>
 									<span>sign in</span>
 								</a>
