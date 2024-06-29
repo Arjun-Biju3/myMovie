@@ -8,21 +8,22 @@
 			<div class="col-12">
 				<div class="sign__content">
 					<!-- registration form -->
-					<form action="#" class="sign__form">
+					<form action="#" method="post" class="sign__form" enctype="multipart/form-data">
+						{% csrf_token %}
 						<a href="index.html" class="sign__logo">
 							<img src="{% static 'img/logo.svg' %}" alt="">
 						</a>
 
 						<div class="sign__group">
-							<input type="text" class="sign__input" placeholder="Name">
+							<input type="text" name="name" class="sign__input" placeholder="Name">
 						</div>
 
 						<div class="sign__group">
-							<input type="text" class="sign__input" placeholder="Email">
+							<input type="text" name="email" class="sign__input" placeholder="Email">
 						</div>
 
 						<div class="sign__group">
-							<input type="password" class="sign__input" placeholder="Password">
+							<input type="password" name="password" class="sign__input" placeholder="Password">
 						</div>
 
 						<div class="sign__group sign__group--checkbox">
@@ -30,7 +31,7 @@
 							<label for="remember">I agree to the <a href="#">Privacy Policy</a></label>
 						</div>
 						
-						<button class="sign__btn" type="button">Sign up</button>
+						<button type="submit" class="sign__btn" type="button">Sign up</button>
 
 						<span class="sign__text">Already have an account? <a href="{% url 'signin' %}">Sign in!</a></span>
 					</form>
