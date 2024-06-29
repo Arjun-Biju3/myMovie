@@ -36,9 +36,13 @@ class Trailer(models.Model):
     
     
 class SeriesComments(models.Model):
+    LIVE=1
+    DELETE=0
+    DELETE_CHOICES=((LIVE,'Live'),(DELETE,'Delete'))
     owner=models.ForeignKey(Series,related_name='series_name1',on_delete=models.SET_NULL,null=True)
     user=models.ForeignKey(Customer,related_name='person',on_delete=models.CASCADE)
     comment=models.TextField(null=False)
+    delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
     created_at=models.DateTimeField(timezone.now)
     
     def __str__(self):
@@ -47,11 +51,15 @@ class SeriesComments(models.Model):
     
     
 class SeriesReview(models.Model):
+    LIVE=1
+    DELETE=0
+    DELETE_CHOICES=((LIVE,'Live'),(DELETE,'Delete'))
     owner=models.ForeignKey(Series,related_name='series_name2',on_delete=models.SET_NULL,null=True)
     user=models.ForeignKey(Customer,related_name='asscociated_person',on_delete=models.CASCADE)
     review=models.TextField(null=False)
     description=models.TextField()
     rating=models.FloatField()
+    delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
     created_at=models.DateTimeField(timezone.now)    
     
     def __str__(self):
