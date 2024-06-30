@@ -18,5 +18,7 @@ Including another URLconf
 from django.urls import path
 from .import views
 urlpatterns = [
-    path('series',views.series_list,name='series')
+    path('series',views.series_list,name='series'),
+    path('details_s/<pk>',views.view_deatils,name='series_details'),
+    
 ]
