@@ -62,7 +62,7 @@
 								</button>
                                
 								{% if  user.is_authenticated %}
-								<a href="" class="header__sign-in two">
+								<a href="{% url 'signout' %}" class="header__sign-in two">
 									<i class="icon ion-ios-log-in"></i>
 									<span>sign out</span>
 								</a>

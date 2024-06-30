@@ -8,17 +8,23 @@
 			<div class="col-12">
 				<div class="sign__content">
 					<!-- authorization form -->
-					<form action="#" class="sign__form">
+					<form action="#" method="post" enctype="multipart/form-data" class="sign__form">
+						{% csrf_token %}
+						{% for message in messages %}
+						<p class="{{ message.tags }}">
+						   {{ message }}
+						</p>
+						{% endfor %}
 						<a href="index.html" class="sign__logo">
 							<img src="{% static 'img/logo.svg' %}" alt="">
 						</a>
-
+                        
 						<div class="sign__group">
-							<input type="text" class="sign__input" placeholder="Email">
+							<input type="text" name="email" class="sign__input" placeholder="Email">
 						</div>
 
 						<div class="sign__group">
-							<input type="password" class="sign__input" placeholder="Password">
+							<input type="password" name="password" class="sign__input" placeholder="Password">
 						</div>
 
 						<div class="sign__group sign__group--checkbox">
@@ -26,7 +32,7 @@
 							<label for="remember">Remember Me</label>
 						</div>
 						
-						<button class="sign__btn" type="button">Sign in</button>
+						<button type="submit" class="sign__btn" type="button">Sign in</button>
 
 						<span class="sign__text">Don't have an account? <a href="{% url 'signup' %}">Sign up!</a></span>
 

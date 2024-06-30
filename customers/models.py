@@ -11,7 +11,7 @@ class Customer(models.Model):
     password=models.TextField(max_length=15)
     user=models.OneToOneField(User,on_delete=models.CASCADE,related_name='user_profile')
     delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
-    created_at=models.DateTimeField(timezone.now)
+    created_at=models.DateTimeField(auto_now_add=True)
     updated_at=models.DateTimeField(auto_now=True)
     
     def __str__(self):

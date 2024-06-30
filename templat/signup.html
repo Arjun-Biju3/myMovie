@@ -3,17 +3,25 @@
 {% load static %}
 <br><br><br>
 <div class="sign section--bg" data-bg="{% static 'img/section/section.jpg' %}">
+
 	<div class="container">
 		<div class="row">
+		
 			<div class="col-12">
 				<div class="sign__content">
+					
 					<!-- registration form -->
 					<form action="#" method="post" class="sign__form" enctype="multipart/form-data">
 						{% csrf_token %}
+						{% for message in messages %}
+						<p class="{{ message.tags }}">
+						   {{ message }}
+						</p>
+						{% endfor %}
 						<a href="index.html" class="sign__logo">
 							<img src="{% static 'img/logo.svg' %}" alt="">
 						</a>
-
+						
 						<div class="sign__group">
 							<input type="text" name="name" class="sign__input" placeholder="Name">
 						</div>
@@ -36,6 +44,7 @@
 						<span class="sign__text">Already have an account? <a href="{% url 'signin' %}">Sign in!</a></span>
 					</form>
 					<!-- registration form -->
+					
 				</div>
 			</div>
 		</div>
