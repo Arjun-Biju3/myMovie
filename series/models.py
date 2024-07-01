@@ -43,7 +43,7 @@ class SeriesComments(models.Model):
     user=models.ForeignKey(Customer,related_name='person',on_delete=models.CASCADE)
     comment=models.TextField(null=False)
     delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
-    created_at=models.DateTimeField(timezone.now)
+    created_at=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.comment
@@ -64,3 +64,15 @@ class SeriesReview(models.Model):
     
     def __str__(self):
         return self.review
+    
+
+class Season(models.Model):
+    owner=models.ForeignKey(Series,on_delete=models.CASCADE,related_name='season_of')
+    start=models.DateField()
+    end=models.DateField()
+    no_of_episodes=models.CharField(max_length=10)
+    season_no=models.CharField(max_length=10)
+    
+    def __str__(self):
+        return self.season_no
+    

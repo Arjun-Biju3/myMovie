@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from series.models import Series
+from series.models import Series,Season,SeriesComments,SeriesReview
 from django.core.paginator import Paginator
 
 def series_list(request):
@@ -14,4 +14,17 @@ def series_list(request):
 
 
 def view_deatils(request,pk):
-    return render(request,'details2.html')
+    if request.POST:
+        comment=request.POST.get('comment')
+        user=request.user
+        usr=user.user_profile
+        owner=Series.objects.get(pk=pk)
+        comment=SeriesComments.objects.create(owner=owner,user=usr,comment=comment)
+    obj=Series.objects.get(pk=pk)
+    series=Series.objects.get(pk=pk)
+    rating=series.rating
+    related=Series.objects.filter(rating=rating).exclude(pk=pk)[:6]
+    season=Season.objects.filter(owner=series)
+    comments=SeriesComments.objects.filter(owner=series)
+    context={'series':obj,'related':related,'season':season,'comments':comments}
+    return render(request,'details2.html',context)

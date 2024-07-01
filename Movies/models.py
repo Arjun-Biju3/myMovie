@@ -41,7 +41,7 @@ class MovieComments(models.Model):
     user=models.ForeignKey(Customer,related_name='associated_user',on_delete=models.CASCADE)
     comment=models.TextField(null=False)
     delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
-    created_at=models.DateTimeField(timezone.now)
+    created_at=models.DateTimeField(auto_now_add=True)
     
     def __str__(self):
         return self.comment

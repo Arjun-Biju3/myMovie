@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from Movies.models import Movies,Genere
+from Movies.models import Movies,Genere,MovieComments,MovieReview
 from series.models import Series
 from django.core.paginator import Paginator
 
@@ -25,6 +25,16 @@ def movie_list(request):
 
 
 def details(request,pk):
+    if request.POST:
+        comment=request.POST.get('comment')
+        user=request.user
+        usr=user.user_profile
+        owner=Movies.objects.get(pk=pk)
+        comment=MovieComments.objects.create(owner=owner,user=usr,comment=comment)
     obj=Movies.objects.get(pk=pk)
-    context={'movie':obj}
+    movie=Movies.objects.get(pk=pk)
+    rating=movie.rating
+    related=Movies.objects.filter(rating=rating).exclude(pk=pk)[:6]
+    comments=MovieComments.objects.filter(owner=movie)
+    context={'movie':obj,'related':related,'comments':comments}
     return render(request,'details1.html',context)
