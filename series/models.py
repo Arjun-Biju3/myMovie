@@ -41,7 +41,7 @@ class SeriesComments(models.Model):
     DELETE_CHOICES=((LIVE,'Live'),(DELETE,'Delete'))
     owner=models.ForeignKey(Series,related_name='series_name1',on_delete=models.SET_NULL,null=True)
     user=models.ForeignKey(Customer,related_name='person',on_delete=models.CASCADE)
-    comment=models.TextField(null=False)
+    comment=models.CharField(null=False,max_length=250)
     delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
     created_at=models.DateTimeField(auto_now_add=True)
     
@@ -57,10 +57,10 @@ class SeriesReview(models.Model):
     owner=models.ForeignKey(Series,related_name='series_name2',on_delete=models.SET_NULL,null=True)
     user=models.ForeignKey(Customer,related_name='asscociated_person',on_delete=models.CASCADE)
     review=models.TextField(null=False)
-    description=models.TextField()
-    rating=models.FloatField()
+    title=models.CharField(max_length=100,null=True)
+    rating=models.FloatField(null=False)
     delete_status=models.IntegerField(choices=DELETE_CHOICES,default=LIVE)
-    created_at=models.DateTimeField(timezone.now)    
+    created_at=models.DateTimeField(auto_now_add=True)    
     
     def __str__(self):
         return self.review

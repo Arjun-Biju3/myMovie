@@ -238,9 +238,14 @@
 
 										<form action="#" class="form" method="post" enctype="multipart/form-data">
 											{% csrf_token %}
+											{% for message in messages %}
+											<p class="{{ message.tags }}">
+											{{ message }}
+											</p>
+											{% endfor %}
 											<input type="text" id="text"  class="form__textarea" name="comment" placeholder="Add comment">
 											<input type="hidden" name="id" value="{{ series.id }}">
-											<button type="submit" class="form__btn">Send</button>
+											<button type="submit" name="comment_s" class="form__btn">Send</button>
 										</form>
 									</div>
 								</div>
@@ -254,48 +259,31 @@
 								<div class="col-12">
 									<div class="reviews">
 										<ul class="reviews__list">
+											{% for obj in review %}
 											<li class="reviews__item">
 												<div class="reviews__autor">
-													<img class="reviews__avatar" src="img/user.png" alt="">
-													<span class="reviews__name">Best Marvel movie in my opinion</span>
-													<span class="reviews__time">24.08.2018, 17:53 by John Doe</span>
+													<img class="reviews__avatar" src="{% static 'img/user.png' %}" alt="">
+													<span class="reviews__name">{{ obj.title }}</span>
+													<span class="reviews__time">{{ obj.created_at }} by {{ obj.user.name }}</span>
 
-													<span class="reviews__rating"><i class="icon ion-ios-star"></i>8.4</span>
+													<span class="reviews__rating"><i class="icon ion-ios-star"></i>{{ obj.rating }}</span>
 												</div>
-												<p class="reviews__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
+												<p class="reviews__text">{{ obj.review }}.</p>
 											</li>
-
-											<li class="reviews__item">
-												<div class="reviews__autor">
-													<img class="reviews__avatar" src="img/user.png" alt="">
-													<span class="reviews__name">Best Marvel movie in my opinion</span>
-													<span class="reviews__time">24.08.2018, 17:53 by John Doe</span>
-
-													<span class="reviews__rating"><i class="icon ion-ios-star"></i>9.0</span>
-												</div>
-												<p class="reviews__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-											</li>
-
-											<li class="reviews__item">
-												<div class="reviews__autor">
-													<img class="reviews__avatar" src="img/user.png" alt="">
-													<span class="reviews__name">Best Marvel movie in my opinion</span>
-													<span class="reviews__time">24.08.2018, 17:53 by John Doe</span>
-
-													<span class="reviews__rating"><i class="icon ion-ios-star"></i>7.5</span>
-												</div>
-												<p class="reviews__text">There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text.</p>
-											</li>
+											{% endfor %}
 										</ul>
 
-										<form action="#" class="form">
-											<input type="text" class="form__input" placeholder="Title">
-											<textarea class="form__textarea" placeholder="Review"></textarea>
-											<div class="form__slider">
-												<div class="form__slider-rating" id="slider__rating"></div>
-												<div class="form__slider-value" id="form__slider-value"></div>
-											</div>
-											<button type="button" class="form__btn">Send</button>
+										<form action="#" method="post" enctype="multipart/form-data" class="form">
+											{% csrf_token %}
+											{% for message in messages %}
+											<p class="{{ message.tags }}">
+											{{ message }}
+											</p>
+											{% endfor %}
+											<input type="text" name="title" class="form__input" placeholder="Title">
+											<textarea class="form__textarea" name="review" placeholder="Review"></textarea>
+											<input type="text" name="rating" class="form__input" placeholder="Rating" id="">
+											<button type="submit" name="review_s" class="form__btn">Send</button>
 										</form>
 									</div>
 								</div>
