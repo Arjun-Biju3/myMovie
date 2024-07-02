@@ -6,10 +6,10 @@ from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 
 def home(request):
-    home=Movies.objects.order_by('-id')[:4]
+    home=Movies.objects.order_by('-id').filter(priority=1)[:4]
     expected=Series.objects.order_by('-id')[:6]
-    new_m=Movies.objects.order_by('priority')[:3]
-    new_s=Series.objects.order_by('priority')[:3]
+    new_m=Movies.objects.order_by('-id')[:3]
+    new_s=Series.objects.order_by('-id')[:3]
     movie_new=Movies.objects.order_by('-id')[:12]
     series_new=Series.objects.order_by('-id')[:12]
     context={'home':home,'expected':expected,'new_m':new_m,'new_s':new_s,'movie_new':movie_new,'series_new':series_new}
