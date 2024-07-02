@@ -65,4 +65,10 @@ def details(request,pk):
     context={'movie':obj,'related':related,'comments':comments,'review':review}
     return render(request,'details1.html',context)
 
-    
+def search(request):
+    if request.POST:
+        search=request.POST.get('search')
+        movie=Movies.objects.filter(name__contains=search)
+        series=Series.objects.filter(name__contains=search)
+        context={'movie':movie,'series':series}
+    return render(request,'search.html',context)

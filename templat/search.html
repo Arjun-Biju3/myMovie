@@ -1,0 +1,86 @@
+{% extends 'blank_layout.html' %}
+
+{% block content %}
+{% load static %}
+
+{% if movie %}
+<section class="section section--bg" data-bg="{% static 'img/section/section.jpg' %}">
+    <div class="container">
+        <br><br><br>
+   
+        <div class="row">
+            <!-- card -->
+             {% for movie in movie %}
+             
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    
+                    <div class="card__cover">
+                        <img src="{{ movie.poster.url }}" alt="">
+                        <a href="{% url 'details' movie.id %}" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        
+                    </div>
+                    </a>
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="#">{{ movie.name }}</a></h3>
+                        <span class="card__category">
+                            {% for obj in movie.genere.all %}
+                            <a href="#">{{ obj.title }}</a>
+                            {% endfor %}
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{ movie.rating }}</span>
+                    </div>
+                </div>
+                
+            </div>
+        
+            {% endfor %}
+            <!-- end card -->
+        </div>
+    
+    </div>
+    <br><br>
+
+  
+</section>
+{% else %}
+
+<section class="section section--bg" data-bg="{% static 'img/section/section.jpg' %}">
+    <div class="container">
+        <br><br><br>
+        <div class="row">
+            <!-- card -->
+             {% for s in series %}
+            <div class="col-6 col-sm-4 col-lg-3 col-xl-2">
+                <div class="card">
+                    
+                    <div class="card__cover">
+                        <img src="{{ s.poster.url }}" alt="">
+                        <a href="{% url 'series_details' s.id %}" class="card__play">
+                            <i class="icon ion-ios-play"></i>
+                        </a>
+                    </div>
+                
+                    <div class="card__content">
+                        <h3 class="card__title"><a href="#">{{ s.name }}</a></h3>
+                        <span class="card__category">
+                            {% for obj in s.genere.all %}
+                            <a href="#">{{ obj.title }}</a>
+                            {% endfor %}
+                        </span>
+                        <span class="card__rate"><i class="icon ion-ios-star"></i>{{ s.rating }}</span>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            <!-- end card -->
+        </div>
+    </div>
+    <br><br>
+
+  
+</section>
+{% endif %}
+
+{% endblock content %}
